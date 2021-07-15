@@ -21,5 +21,13 @@ from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain-pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/accounts/', include('accounts.urls') ),
+    path('api/venders/', include('venders.urls') ),
     path('admin/', admin.site.urls),
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+
+#### below part connect with react ... 
+urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]

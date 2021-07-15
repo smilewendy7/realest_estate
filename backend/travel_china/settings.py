@@ -43,11 +43,12 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'accounts',
+    'venders',
 ]
 
 MIDDLEWARE = [
     ## ---- new start **
-    'coresheaders.middleware.CoresMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     ## ---- new end ** 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -155,7 +156,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 FILE_UPLOAD_PERMISSIONS=0o640
 ## ---- new end **
 
-
+AUTH_USER_MODEL = 'accounts.UserAccount'
 
 
 # Default primary key field type
