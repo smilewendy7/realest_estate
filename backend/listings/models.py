@@ -7,13 +7,13 @@ from venders.models import Vender
 class Listing(models.Model):
     class SaleType(models.TextChoices):
         #### price will be cheaper for groups 
-        SINGLE_SALE = 'Regular Sale'
-        GROUP_SALE = 'Group Sale'
+        FOR_SALE = 'For Sale'
+        FOR_RENT = 'FOr Rent'
 
-    class TicketType(models.TextChoices):
-        HOTEL = 'Hotel'
-        TOUR = 'Tour'
-        TICKET = 'Ticket'
+    class HomeType(models.TextChoices):
+        HOUSE = 'House'
+        CONDO = 'Condo'
+        TOWNHOUSE = 'Townhouse'
 
 
     vender = models.ForeignKey(Vender, on_delete=models.DO_NOTHING)
@@ -22,14 +22,14 @@ class Listing(models.Model):
     title = models.CharField(max_length=150)
     address = models.CharField(max_length=150)
     city = models.CharField(max_length=100)
-    province = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
     zipcode = models.CharField(max_length=15)
     description = models.TextField(blank=True)
-    sale_type = models.CharField(max_length=50, choices=SaleType.choices, default=SaleType.SINGLE_SALE)
+    sale_type = models.CharField(max_length=50, choices=SaleType.choices, default=SaleType.FOR_SALE)
     price = models.IntegerField()
     bedrooms = models.IntegerField()
     bathrooms = models.DecimalField(max_digits=2, decimal_places=1)
-    ticket_type = models.CharField(max_length=50, choices=TicketType.choices, default=TicketType.TICKET)
+    home_type = models.CharField(max_length=50, choices=HomeType.choices, default=HomeType.HOUSE)
     sqft = models.IntegerField()
     open_house = models.BooleanField(default=False)
     photo_main = models.ImageField(upload_to="photos/%Y/%m/%d/")
